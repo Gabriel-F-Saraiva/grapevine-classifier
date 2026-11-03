@@ -42,7 +42,7 @@ def previsao(interpreter, image):
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
 
-    interpreter.set_tensor(input_details[0][index], image)
+    interpreter.set_tensor(input_details[0]['index'], image)
 
     interpreter.invoke()
 
@@ -54,7 +54,7 @@ def previsao(interpreter, image):
     df['probabilidades (%)'] = 100*output_data[0]
 
     fig = px.bar(df, y='classes', x='probabilidades (%)',
-                 orientation = 'h', text = 'probabilidades(%)', 
+                 orientation = 'h', text = 'probabilidades (%)', 
                  title = 'Probabilidade de Classes de Doenças em Uvas')
     st.plotly_chart(fig)
 
@@ -76,7 +76,7 @@ def main():
 
 
     #Carrega imagem
-    image = carrega_imagem
+    image = carrega_imagem()
 
 
     #Classifica
